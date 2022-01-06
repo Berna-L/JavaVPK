@@ -13,7 +13,7 @@ plugins {
 }
 
 group = "com.connorhaigh"
-version = "1.2.2"
+version = "1.2.2-Gradle"
 
 
 repositories {
@@ -45,5 +45,15 @@ tasks.jar {
     }
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
+}
+
+
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+        }
+    }
 }
 
